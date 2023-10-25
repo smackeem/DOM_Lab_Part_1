@@ -14,6 +14,7 @@ mainEl.setAttribute('class', 'flex-ctr');
 const topMenuEl = document.getElementById('top-menu');
 topMenuEl.style.height = '100%';
 topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
+topMenuEl.setAttribute('class', 'flex-around')
 
 menuLinks.forEach(function(menuLink){
     const linkEl = document.createElement('a');
