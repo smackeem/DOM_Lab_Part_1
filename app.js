@@ -21,3 +21,4 @@ menuLinks.forEach(function(menuLink){
     linkEl.innerText = menuLink.text;
     topMenuEl.appendChild(linkEl);
 })
+console.log(topMenuEl)
