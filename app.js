@@ -22,3 +22,9 @@ menuLinks.forEach(function(menuLink){
     topMenuEl.appendChild(linkEl);
 })
 console.log(topMenuEl)
+
+const subMenuEl = document.getElementById('sub-menu');
+/* console.log(subMenuEl) */
+subMenuEl.style.height = "100%";
+subMenuEl.style.backgroundColor = "var(--sub-menu-bg)";
+subMenuEl.setAttribute("class","flex-around");

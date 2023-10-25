@@ -42,7 +42,7 @@
     background-color: var(--sub-menu-bg);
   }
 
-  head, #top-menu {
+  header, #top-menu {
     position: relative;
   }
 
