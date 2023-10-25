@@ -33,10 +33,9 @@ menuLinks.forEach(function(menuLink){
     linkEl.innerText = menuLink.text;
     topMenuEl.appendChild(linkEl);
 })
-// console.log(topMenuEl)
+
 // Sub Menu Elements
 const subMenuEl = document.getElementById('sub-menu');
-// console.log(subMenuEl)
 subMenuEl.style.height = "100%";
 subMenuEl.style.backgroundColor = "var(--sub-menu-bg)";
 subMenuEl.setAttribute("class","flex-around");
@@ -44,15 +43,62 @@ subMenuEl.style.position = 'absolute';
 subMenuEl.style.top = '0';
 
 const topMenuLinks = topMenuEl.querySelectorAll('a');
-console.log(topMenuLinks)
 let showingSubMenu = false;
 
 topMenuEl.addEventListener('click',function(event){
   event.preventDefault();
+  console.log(event)
   if(event.target.tagName !== 'A'){
     return;
   }else{
-
     console.log(event.target.innerHTML);
   }
+  if(event.target.className === 'active'){
+    event.target.classList.remove('active');
+    showingSubMenu = false;
+    subMenuEl.style.top = 0;
+    return;
+  }
+  for(let links of topMenuLinks){
+    links.classList.remove('active');
+  }
+  event.target.className = 'active';
+
+   const subMenuLinks = menuLinks.find(link => link.subLinks && event.target.innerHTML === link.text);
+  if(subMenuLinks){
+    showingSubMenu = true;
+  }else{
+    showingSubMenu = false;
+  }
+
+  if(showingSubMenu){
+    buildSubMenu(subMenuLinks.subLinks);
+    subMenuEl.style.top = '100%';
+  }else{
+    subMenuEl.style.top = '0';
+    mainEl.innerHTML = '<h1>about</h1>';
+  }
+})
+
+function buildSubMenu(subLinks){
+  subMenuEl.innerHTML = "";
+  subLinks.forEach(function(subLink){
+    const subLinkEl = document.createElement('a');
+    subLinkEl.setAttribute('href',subLink.href);
+    subLinkEl.innerText = subLink.text;
+    subMenuEl.appendChild(subLinkEl);
+  })
+}
+
+subMenuEl.addEventListener('click', function(event){
+  event.preventDefault();
+  const subMenu = event.target;
+  if(subMenu.tagName !== "A") return;
+  console.log(subMenu.innerText)
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+  for(let links of topMenuLinks){
+    links.classList.remove('active');
+  }
+  mainEl.innerHTML = '<h1>'+ subMenu.innerHTML +'</h1>';
 })
